@@ -9,7 +9,6 @@ import {
   MessageSquare,
   Zap,
   AlertTriangle,
-  ThumbsUp,
   Users,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -330,31 +329,31 @@ export default function Landing() {
                   "View aggregated insights, trends, and highlighted complaints or praise in a beautiful dashboard.",
                 color: "#9b6ef3",
               },
-            ].map((s, i) => (
+            ].map((step) => (
               <motion.div
-                key={s.step}
+                key={step.step}
                 variants={scaleIn}
                 className="glass rounded-2xl p-6 glass-edge text-center relative"
               >
                 <div className="flex justify-center mb-2">
                   <span
                     className="flex size-8 items-center justify-center rounded-lg text-xs font-bold text-white"
-                    style={{ backgroundColor: s.color }}
+                    style={{ backgroundColor: step.color }}
                   >
-                    {s.step}
+                    {step.step}
                   </span>
                 </div>
                 <div
                   className="flex size-10 items-center justify-center rounded-xl mx-auto mb-4"
-                  style={{ backgroundColor: `${s.color}0.12)` }}
+                  style={{ backgroundColor: `${step.color}0.12)` }}
                 >
-                  <s.icon className="size-5" style={{ color: s.color }} />
+                  <step.icon className="size-5" style={{ color: step.color }} />
                 </div>
                 <h3 className="text-sm font-semibold text-foreground/90 mb-2">
-                  {s.title}
+                  {step.title}
                 </h3>
                 <p className="text-xs leading-relaxed text-muted-foreground/70">
-                  {s.description}
+                  {step.description}
                 </p>
               </motion.div>
             ))}
@@ -373,9 +372,9 @@ export default function Landing() {
         >
           <motion.div variants={fadeUp} className="glass rounded-2xl p-8 glass-edge text-center">
             <div className="flex justify-center gap-1 mb-4">
-              {[1, 2, 3, 4, 5].map((i) => (
+              {[1, 2, 3, 4, 5].map((star) => (
                 <Star
-                  key={i}
+                  key={star}
                   className="size-4 fill-[#3fb58b] text-[#3fb58b]"
                 />
               ))}

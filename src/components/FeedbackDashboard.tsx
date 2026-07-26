@@ -28,15 +28,8 @@ import {
   Frown,
   Meh,
   RefreshCw,
-  Users,
   BarChart3,
   Timer,
-  FileText,
-  FileSpreadsheet,
-  Download,
-  Upload,
-  ChevronDown,
-  ChevronUp,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import FeedbackReport from "@/components/FeedbackReport";
@@ -69,18 +62,6 @@ const COLORS = {
   chart5: "#8bd46a",
 };
 
-const SENTIMENT_COLORS = {
-  positive: COLORS.positive,
-  negative: COLORS.negative,
-  neutral: COLORS.neutral,
-};
-
-const PRODUCT_COLORS = {
-  "Mobile App": COLORS.chart2,
-  "Desktop App": COLORS.chart1,
-  "Web Platform": COLORS.chart3,
-};
-
 // ─── Helper: format date ───
 function formatDate(ts: number) {
   return new Date(ts).toLocaleDateString("en-US", {
@@ -105,14 +86,12 @@ function StatCard({
   value,
   sublabel,
   trend,
-  delay = 0,
 }: {
   icon: React.ElementType;
   label: string;
   value: string | number;
   sublabel?: string;
   trend?: "up" | "down" | "neutral";
-  delay?: number;
 }) {
   return (
     <motion.div

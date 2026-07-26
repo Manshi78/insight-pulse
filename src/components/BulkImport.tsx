@@ -9,11 +9,8 @@ import {
   Download,
   CheckCircle2,
   AlertCircle,
-  X,
   Loader2,
-  ArrowRight,
   RefreshCw,
-  FileText,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 

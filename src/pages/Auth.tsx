@@ -15,7 +15,6 @@ import {
 } from "@/components/ui/input-otp";
 
 import { useAuth } from "@/hooks/use-auth";
-import logo from "@/assets/logo.svg";
 import {
   ArrowRight,
   BarChart3,

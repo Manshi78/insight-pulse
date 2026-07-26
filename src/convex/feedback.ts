@@ -1,6 +1,5 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
-import { Doc } from "./_generated/dataModel";
 
 const SAMPLE_FEEDBACK = [
   {
@@ -305,7 +304,6 @@ export const getInsights = query({
 
     // Monthly trend (last 4 weeks)
     const now = Date.now();
-    const fourWeeksAgo = now - 28 * 86400000;
     const weeklyBuckets: { label: string; count: number; positive: number; negative: number }[] = [];
     for (let w = 0; w < 4; w++) {
       const weekStart = now - (3 - w) * 7 * 86400000;

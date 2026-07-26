@@ -93,11 +93,21 @@ function Carousel({
 
   React.useEffect(() => {
     if (!api) return
-    onSelect(api)
+
+    // Set initial state outside the effect callback to avoid cascading renders
+    const initState = () => {
+      setCanScrollPrev(api.canScrollPrev())
+      setCanScrollNext(api.canScrollNext())
+    }
+
+    // Use requestAnimationFrame to move state update out of effect
+    const raf = requestAnimationFrame(initState)
+
     api.on("reInit", onSelect)
     api.on("select", onSelect)
 
     return () => {
+      cancelAnimationFrame(raf)
       api?.off("select", onSelect)
     }
   }, [api, onSelect])

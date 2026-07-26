@@ -1,29 +1,15 @@
 import { useState } from "react";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
   FileText,
   Download,
-  FileSpreadsheet,
   Loader2,
   CheckCircle2,
-  AlertCircle,
-  BarChart3,
-  Star,
-  TrendingUp,
 } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 // ─── Helpers ───
-const COLORS = {
-  positive: "#3fb58b",
-  negative: "#e86a58",
-  neutral: "#8b95b0",
-  primary: "#4f6ef7",
-};
-
 function formatDateFull(ts: number) {
   return new Date(ts).toLocaleDateString("en-US", {
     weekday: "long",
@@ -31,12 +17,6 @@ function formatDateFull(ts: number) {
     month: "long",
     day: "numeric",
   });
-}
-
-function getSentimentEmoji(s: string) {
-  if (s === "positive") return "😊";
-  if (s === "negative") return "😟";
-  return "😐";
 }
 
 function getCategoryIcon(cat: string) {
