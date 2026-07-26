@@ -31,8 +31,16 @@ import {
   Users,
   BarChart3,
   Timer,
+  FileText,
+  FileSpreadsheet,
+  Download,
+  Upload,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import FeedbackReport from "@/components/FeedbackReport";
+import BulkImport from "@/components/BulkImport";
 
 // ─── Container variants for staggered animations ───
 const container = {
@@ -687,6 +695,12 @@ export default function FeedbackDashboard() {
             ))}
           </div>
         </GlassCard>
+      </div>
+
+      {/* ────────────── Actions: Report + Bulk Import ────────────── */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <FeedbackReport />
+        <BulkImport />
       </div>
 
       {/* ────────────── Recent Feedback Table ────────────── */}

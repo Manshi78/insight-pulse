@@ -215,6 +215,57 @@ export const submit = mutation({
   },
 });
 
+/** Bulk import feedback entries from CSV data. */
+export const bulkImport = mutation({
+  args: {
+    entries: v.array(v.object({
+      customerName: v.string(),
+      email: v.string(),
+      product: v.string(),
+      rating: v.number(),
+      sentiment: v.union(v.literal("positive"), v.literal("negative"), v.literal("neutral")),
+      category: v.string(),
+      message: v.string(),
+    })),
+  },
+  handler: async (ctx, args) => {
+    const now = Date.now();
+    let imported = 0;
+    let skipped = 0;
+
+    for (const entry of args.entries) {
+      // Validate rating
+      if (entry.rating < 1 || entry.rating > 5) {
+        skipped++;
+        continue;
+      }
+      // Validate sentiment
+      if (!["positive", "negative", "neutral"].includes(entry.sentiment)) {
+        skipped++;
+        continue;
+      }
+      if (!entry.customerName.trim() || !entry.message.trim()) {
+        skipped++;
+        continue;
+      }
+
+      await ctx.db.insert("feedback", {
+        customerName: entry.customerName.trim(),
+        email: entry.email.trim(),
+        product: entry.product.trim(),
+        rating: entry.rating,
+        sentiment: entry.sentiment,
+        category: entry.category.trim(),
+        message: entry.message.trim(),
+        createdAt: now - imported * 100, // slight spread for ordering
+      });
+      imported++;
+    }
+
+    return { imported, skipped };
+  },
+});
+
 /** Get aggregated insights from feedback data. */
 export const getInsights = query({
   handler: async (ctx) => {
